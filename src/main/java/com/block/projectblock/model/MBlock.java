@@ -1,4 +1,4 @@
-package com.block.projectblock;
+package com.block.projectblock.model;
 
 
 import lombok.*;

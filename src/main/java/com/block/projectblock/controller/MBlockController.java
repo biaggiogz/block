@@ -1,17 +1,20 @@
-package com.block.projectblock;
+package com.block.projectblock.controller;
 
 
+import com.block.projectblock.dto.DtoMblock;
+import com.block.projectblock.model.MBlock;
+import com.block.projectblock.services.ServicesMBlock;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/block")
-public class BlockController {
+public class MBlockController {
 
-    private final ServicesBlock servBlock;
+    private final ServicesMBlock servBlock;
 
-    public BlockController(ServicesBlock servBlock) {
+    public MBlockController(ServicesMBlock servBlock) {
         this.servBlock = servBlock;
     }
     @GetMapping("/list")
@@ -19,7 +22,7 @@ public class BlockController {
         return  servBlock.list();
     }
     @PostMapping
-    public  MBlock create(@RequestBody MBlock block){
+    public  MBlock create(@RequestBody DtoMblock block){
         return servBlock.createBlock(block);
     }
     @PutMapping
