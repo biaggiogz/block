@@ -11,7 +11,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name="block")
+@Table(name="BLOCK_TABLE")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,8 +25,6 @@ public class Block {
     Float height,weight,blockReward,feeReward,txCount,txVolume;
     int confirmations;
     byte blockSize,strippedSize;
-    Date time;
-
-
+    String time;
 
 }

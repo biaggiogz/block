@@ -15,7 +15,7 @@ public class BlockController {
     public BlockController(ServicesBlock servBlock) {
         this.servBlock = servBlock;
     }
-    @GetMapping
+    @GetMapping("/list")
     public List<Block> listar(){
         return  servBlock.list();
     }
