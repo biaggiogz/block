@@ -9,9 +9,8 @@ import lombok.Data;
 public class DtoMblock {
 
 
-    String difficulty,merkleRoot,version,nonce,bits;
+    String difficulty,merkleRoot,version,nonce,bits,blockSize,strippedSize;
     Float height,weight,blockReward,feeReward,txCount,txVolume;
     int confirmations;
-    byte blockSize,strippedSize;
 
 }
