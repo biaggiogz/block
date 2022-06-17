@@ -18,7 +18,7 @@ public class MBlockController {
         this.servBlock = servBlock;
     }
     @GetMapping("/list")
-    public List<MBlock> listar(){
+    public Iterable<MBlock> listar(){
         return  servBlock.list();
     }
     @PostMapping

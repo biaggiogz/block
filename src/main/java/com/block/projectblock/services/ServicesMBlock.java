@@ -25,7 +25,7 @@ public class ServicesMBlock {
     public MBlock updateBlock(MBlock block){
         return repoBlock.save(block);
     }
-    public List<MBlock> list(){
+    public Iterable<MBlock> list(){
         return repoBlock.findAll();
     }
     public void deleteBlock(MBlock block){

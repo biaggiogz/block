@@ -13,8 +13,9 @@ public class DtoMBlockMapper implements  mapperIO<DtoMblock, MBlock> {
     Date tt= new Date();
     @Override
     public MBlock map(DtoMblock in) {
+
         MBlock mb = new MBlock();
-        mb.setHash(String.valueOf(Hashing.sha256()));
+        mb.setHash(in.getBits()+in.getBlockSize());
         mb.setDifficulty(in.getDifficulty());
         mb.setMerkleRoot(in.getMerkleRoot());
         mb.setVersion(in.getVersion());
@@ -29,7 +30,6 @@ public class DtoMBlockMapper implements  mapperIO<DtoMblock, MBlock> {
         mb.setBlockSize(in.getBlockSize());
         mb.setStrippedSize(in.getStrippedSize());
         mb.setTime(String.valueOf(tt.getTime()));
-
         return mb;
     }
 }
