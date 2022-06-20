@@ -19,27 +19,36 @@ public class MBlockController {
     public MBlockController(ServicesMBlock servBlock) {
         this.servBlock = servBlock;
     }
+
+    //----------------SQL_REST--------------------------------//
     @GetMapping("/list")
-    public Iterable<MBlock> listar(){
-        return  servBlock.list();
+    public Iterable<MBlock> listar(){return  servBlock.list();}
+
+    @GetMapping("/list/{hash}")
+    public MBlock listarByHash(@PathVariable String hash){
+        return  servBlock.finbyHash(hash);
     }
 
-    @GetMapping("/listNosql")
-    public Iterable<MBlockNosql> listarNosql(){
-        return  servBlock.listNosql();
-    }
     @PostMapping
     public  MBlock create(@RequestBody DtoMblock block){
         return servBlock.createBlock(block);
     }
-//    @PutMapping
-//    public  MBlock update(@RequestBody MBlock block){
-//
-//        return servBlock.updateBlock(block);
-//    }
+
     @DeleteMapping("/{hash}")
     public ResponseEntity<Void> delete(@PathVariable("hash") String hash) {
         servBlock.deletebyHash(hash);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/update/{hash}")
+    public  MBlock update(@PathVariable String hash, @RequestBody MBlock block){
+        return servBlock.updateBlock(hash,block);
+    }
+
+    //----------------NOSQL_REST--------------------------------//
+    @GetMapping("/listNosql")
+    public Iterable<MBlockNosql> listarNosql(){
+        return  servBlock.listNosql();
+    }
+
 }

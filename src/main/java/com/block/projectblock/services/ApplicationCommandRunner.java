@@ -23,8 +23,6 @@ public class ApplicationCommandRunner implements CommandLineRunner {
     @Autowired
     private  RepositoryMBlockNosql rpmongoDB ;
 
-
-
     @Override
     public void run(String... args) throws Exception {
 
