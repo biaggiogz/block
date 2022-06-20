@@ -10,17 +10,20 @@ import com.block.projectblock.repository.RepositoryMBlockNosql;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.Spliterator;
 
 @Service
 public class ServicesMBlock {
     private final RepositoryMBlock repoBlock;
 
-
+    private final RepositoryMBlockNosql repoBlockNOSQL;
     private final DtoMBlockMapper mapper;
 
-    public ServicesMBlock(RepositoryMBlock repoBlock, DtoMBlockMapper mapper) {
+    public ServicesMBlock(RepositoryMBlock repoBlock, RepositoryMBlockNosql repoBlockNOSQL, DtoMBlockMapper mapper) {
         this.repoBlock = repoBlock;
+        this.repoBlockNOSQL = repoBlockNOSQL;
 
         this.mapper = mapper;
     }
@@ -34,6 +37,9 @@ public class ServicesMBlock {
     }
     public Iterable<MBlock> list(){
         return repoBlock.findAll();
+    }
+    public Iterable<MBlockNosql> listNosql(){
+        return repoBlockNOSQL.findAll();
     }
 
     public void deleteBlock(MBlock block){

@@ -3,6 +3,7 @@ package com.block.projectblock.controller;
 
 import com.block.projectblock.dto.DtoMblock;
 import com.block.projectblock.model.MBlock;
+import com.block.projectblock.model.MBlockNosql;
 import com.block.projectblock.services.ServicesMBlock;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,11 @@ public class MBlockController {
     @GetMapping("/list")
     public Iterable<MBlock> listar(){
         return  servBlock.list();
+    }
+
+    @GetMapping("/listNosql")
+    public Iterable<MBlockNosql> listarNosql(){
+        return  servBlock.listNosql();
     }
     @PostMapping
     public  MBlock create(@RequestBody DtoMblock block){
