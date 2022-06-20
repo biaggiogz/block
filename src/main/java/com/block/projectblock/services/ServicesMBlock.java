@@ -4,20 +4,24 @@ import com.block.projectblock.dto.DtoMblock;
 import com.block.projectblock.mapper.DtoMBlockMapper;
 import com.block.projectblock.model.Exceptions;
 import com.block.projectblock.model.MBlock;
+import com.block.projectblock.model.MBlockNosql;
 import com.block.projectblock.repository.RepositoryMBlock;
+import com.block.projectblock.repository.RepositoryMBlockNosql;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ServicesMBlock {
     private final RepositoryMBlock repoBlock;
+
+
     private final DtoMBlockMapper mapper;
 
     public ServicesMBlock(RepositoryMBlock repoBlock, DtoMBlockMapper mapper) {
         this.repoBlock = repoBlock;
+
         this.mapper = mapper;
     }
 
@@ -31,6 +35,7 @@ public class ServicesMBlock {
     public Iterable<MBlock> list(){
         return repoBlock.findAll();
     }
+
     public void deleteBlock(MBlock block){
         repoBlock.delete(block);
     }

@@ -5,6 +5,7 @@ import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
 public class ProjectblockApplication {
