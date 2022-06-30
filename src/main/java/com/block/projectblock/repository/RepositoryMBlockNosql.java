@@ -10,5 +10,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RepositoryMBlockNosql extends MongoRepository<MBlockNosql,String> {
 }
