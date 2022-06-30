@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface RepositoryMBlock extends CrudRepository<MBlock,String> {
+public interface RepositoryMBlock extends JpaRepository<MBlock,String> {
 }

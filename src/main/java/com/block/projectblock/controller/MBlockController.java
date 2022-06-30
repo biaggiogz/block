@@ -33,6 +33,10 @@ public class MBlockController {
     public  MBlock create(@RequestBody DtoMblock block){
         return servBlock.createBlock(block);
     }
+    @PostMapping("/post/{blockdto}")
+    public  MBlock createdirect(@PathVariable DtoMblock block){
+        return servBlock.createBlock(block);
+    }
 
     @DeleteMapping("/{hash}")
     public ResponseEntity<Void> delete(@PathVariable("hash") String hash) {
