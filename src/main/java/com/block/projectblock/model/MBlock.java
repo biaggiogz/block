@@ -1,18 +1,16 @@
 package com.block.projectblock.model;
 
 
+import com.google.j2objc.annotations.ObjectiveCName;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
 @Table(name="BLOCK_TABLE")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -24,6 +22,9 @@ public class MBlock {
     Float height,weight,blockReward,feeReward,txCount,txVolume;
     int confirmations;
     String time;
+    @OneToMany
+    @JoinColumn(name = "poolfk")
+    List<Pool> pools;
 
 
 
