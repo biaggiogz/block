@@ -40,34 +40,16 @@ public class ServicesMBlock {
         MBlock mb = mapper.map(block);
         return repoBlock.save(mb);
     }
-
-    public MBlock updateBlockByPool(String hash, MBlock block, String name){
+    public MBlock updateBlockByPool(String hash,  List<Pool> pools){
         MBlock blockupdate = finbyHash(hash);
         if(blockupdate!=null){
-            Pool p =servicePool.findbyName(name);
-            List<Pool> listpool = new ArrayList<>();
-            listpool.add(p);
-            if(blockupdate.getPools().size() < 1){
-                blockupdate.setPools(listpool);
+            for(int x = 0;  x < pools.size(); x++ ){
+                repositoryPool.save(pools.get(x));
             }
-            else{
-                block.getPools().add(p);
-                blockupdate.setPools(block.getPools());
-            }
-
-            return repoBlock.save(blockupdate);
-        }
-        return null;
-
-    }
-    public MBlock updateBlockByPool2(String hash,  Pool p){
-        MBlock blockupdate = finbyHash(hash);
-        if(blockupdate!=null){
 //            servicePool.repositoryPool.save(p);
-            repositoryPool.save(p);
-            List<Pool> listpool = new ArrayList<>();
-            listpool.add(p);
-            blockupdate.setPools(listpool);
+//            List<Pool> listpool = new ArrayList<>();
+//            listpool.add(p);
+            blockupdate.setPools(pools);
             return repoBlock.save(blockupdate);
         }
         return null;

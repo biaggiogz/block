@@ -52,12 +52,8 @@ public class MBlockController {
     }
 
     @PutMapping("/update/pool/{hash}")
-    public  MBlock updateByPool(@PathVariable String hash, @RequestBody MBlock block,@PathVariable String pool){
-        return servBlock.updateBlockByPool(hash,block, pool);
-    }
-    @PutMapping("/update/pool2/{hash}")
-    public  MBlock updateByPool2(@PathVariable String hash, @RequestBody Pool pool){
-        return servBlock.updateBlockByPool2(hash ,pool);
+    public  MBlock updateByPool(@PathVariable String hash, @RequestBody List<Pool> pools){
+        return servBlock.updateBlockByPool(hash ,pools);
     }
 
     //----------------NOSQL_REST--------------------------------//
