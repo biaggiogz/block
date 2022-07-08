@@ -79,7 +79,7 @@ public class ServicesMBlock {
         if (optionalTask.isEmpty()) {
             throw new Exceptions("Task not found", HttpStatus.NOT_FOUND);
         }
-        repoBlock.deleteById(hash);
+        repoBlock.delete(optionalTask.get());
     }
 
     public MBlock finbyHash(String hash){
