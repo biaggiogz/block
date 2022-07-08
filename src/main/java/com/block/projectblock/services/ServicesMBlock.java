@@ -46,9 +46,6 @@ public class ServicesMBlock {
             for(int x = 0;  x < pools.size(); x++ ){
                 repositoryPool.save(pools.get(x));
             }
-//            servicePool.repositoryPool.save(p);
-//            List<Pool> listpool = new ArrayList<>();
-//            listpool.add(p);
             blockupdate.setPools(pools);
             return repoBlock.save(blockupdate);
         }
@@ -67,8 +64,6 @@ public class ServicesMBlock {
         return null;
 
     }
-
-
 
     public Iterable<MBlock> list(){
         return repoBlock.findAll();

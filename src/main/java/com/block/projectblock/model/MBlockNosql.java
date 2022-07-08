@@ -24,9 +24,5 @@ public class MBlockNosql {
     Float height,weight,blockReward,feeReward,txCount,txVolume;
     int confirmations;
     String time;
-    public MBlockNosql(String hash, String difficulty){
-        this.hash = hash;
-        this.difficulty = difficulty;
 
-    }
 }

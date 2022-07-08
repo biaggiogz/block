@@ -19,12 +19,5 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.block.projectblock.controller"))
                 .build();
     }
-//@Bean
-//public Docket productApi() {
-//    return new Docket(DocumentationType.SWAGGER_2)
-//            .select()
-//            .apis(RequestHandlerSelectors.any())
-//            .paths(PathSelectors.any())
-//            .build();
-//}
+
 }
