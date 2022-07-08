@@ -5,6 +5,7 @@ import com.block.projectblock.dto.DtoMblock;
 import com.block.projectblock.model.MBlock;
 import com.block.projectblock.model.MBlockNosql;
 import com.block.projectblock.model.Pool;
+import com.block.projectblock.model.PoolNosql;
 import com.block.projectblock.services.ServicesMBlock;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -62,6 +63,12 @@ public class MBlockController {
     @PostMapping("/nosql")
     public  MBlockNosql createNosql(@RequestBody MBlockNosql block){
         return servBlock.createBlockNosql(block);
+    }
+
+
+    @PutMapping("/update/pool/Nosql/{hash}")
+    public  MBlockNosql updateByPoolNosql(@PathVariable String hash, @RequestBody List<PoolNosql> poolsNosql){
+        return servBlock.updateBlockByPoolNosql(hash ,poolsNosql);
     }
 
 

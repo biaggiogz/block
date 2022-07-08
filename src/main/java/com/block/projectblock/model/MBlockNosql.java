@@ -4,10 +4,9 @@ package com.block.projectblock.model;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.lang.annotation.Documented;
+import java.util.List;
 
 
 @Document(collection = "mBlockNosql")
@@ -24,5 +23,8 @@ public class MBlockNosql {
     Float height,weight,blockReward,feeReward,txCount,txVolume;
     int confirmations;
     String time;
+    @OneToMany
+    @JoinColumn(name = "poolfk")
+    List<PoolNosql> pools;
 
 }

@@ -2,18 +2,15 @@ package com.block.projectblock.services;
 
 import com.block.projectblock.dto.DtoMblock;
 import com.block.projectblock.mapper.DtoMBlockMapper;
-import com.block.projectblock.model.Exceptions;
-import com.block.projectblock.model.MBlock;
-import com.block.projectblock.model.MBlockNosql;
-import com.block.projectblock.model.Pool;
+import com.block.projectblock.model.*;
 import com.block.projectblock.repository.RepositoryMBlock;
 import com.block.projectblock.repository.RepositoryMBlockNosql;
 import com.block.projectblock.repository.RepositoryPool;
+import com.block.projectblock.repository.RepositoryPoolNosql;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,12 +26,15 @@ public class ServicesMBlock {
 
     private final DtoMBlockMapper mapper;
 
-    public ServicesMBlock(RepositoryMBlock repoBlock, RepositoryMBlockNosql repoBlockNOSQL, RepositoryPool repositoryPool, ServicePool servicePool, DtoMBlockMapper mapper) {
+    private final RepositoryPoolNosql repositoryPoolNosql;
+
+    public ServicesMBlock(RepositoryMBlock repoBlock, RepositoryMBlockNosql repoBlockNOSQL, RepositoryPool repositoryPool, ServicePool servicePool, DtoMBlockMapper mapper, RepositoryPoolNosql repositoryPoolNosql) {
         this.repoBlock = repoBlock;
         this.repoBlockNOSQL = repoBlockNOSQL;
         this.repositoryPool = repositoryPool;
         this.servicePool = servicePool;
         this.mapper = mapper;
+        this.repositoryPoolNosql = repositoryPoolNosql;
     }
     //----------------SQL_Services--------------------------------//
     public MBlock createBlock(DtoMblock block){
@@ -49,6 +49,19 @@ public class ServicesMBlock {
             }
             blockupdate.setPools(pools);
             return repoBlock.save(blockupdate);
+        }
+        return null;
+
+    }
+
+    public MBlockNosql updateBlockByPoolNosql(String hash,  List<PoolNosql> pools){
+        MBlockNosql blockupdate = finbyHashNOSQL(hash);
+        if(blockupdate!=null){
+            for(int x = 0;  x < pools.size(); x++ ){
+                repositoryPoolNosql.save(pools.get(x));
+            }
+            blockupdate.setPools(pools);
+            return repoBlockNOSQL.save(blockupdate);
         }
         return null;
 
@@ -85,6 +98,11 @@ public class ServicesMBlock {
     public MBlock finbyHash(String hash){
         return repoBlock.findById(hash).get();
     }
+
+    public MBlockNosql finbyHashNOSQL(String hash){
+        Optional<MBlockNosql> m = repoBlockNOSQL.findByHash(hash);
+        return m.get();
+    }
     //----------------NoSql_Services--------------------------------//
     public Iterable<MBlockNosql> listNosql(){
 
@@ -92,7 +110,7 @@ public class ServicesMBlock {
     }
     @Async
     public MBlockNosql createBlockNosql(MBlockNosql block){
-
+            block.setHash(block.getBits() + block.getBlockSize());
         return repoBlockNOSQL.save(block);
     }
 }
