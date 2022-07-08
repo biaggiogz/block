@@ -10,6 +10,7 @@ import com.block.projectblock.repository.RepositoryMBlock;
 import com.block.projectblock.repository.RepositoryMBlockNosql;
 import com.block.projectblock.repository.RepositoryPool;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -86,6 +87,12 @@ public class ServicesMBlock {
     }
     //----------------NoSql_Services--------------------------------//
     public Iterable<MBlockNosql> listNosql(){
+
         return repoBlockNOSQL.findAll();
+    }
+    @Async
+    public MBlockNosql createBlockNosql(MBlockNosql block){
+
+        return repoBlockNOSQL.save(block);
     }
 }

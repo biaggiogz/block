@@ -7,6 +7,7 @@ import com.block.projectblock.model.MBlockNosql;
 import com.block.projectblock.model.Pool;
 import com.block.projectblock.services.ServicesMBlock;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,10 +31,10 @@ public class MBlockController {
         return  servBlock.finbyHash(hash);
     }
 
-    @PostMapping
-    public  MBlock create(@RequestBody DtoMblock block){
-        return servBlock.createBlock(block);
-    }
+//    @PostMapping
+//    public  MBlock create(@RequestBody DtoMblock block){
+//        return servBlock.createBlock(block);
+//    }
 
     @PostMapping("/post/{blockdto}")
     public  MBlock createdirect(@PathVariable DtoMblock block){
@@ -61,5 +62,12 @@ public class MBlockController {
     public Iterable<MBlockNosql> listarNosql(){
         return  servBlock.listNosql();
     }
+    @Async
+    @PostMapping("/nosql")
+    public  MBlockNosql createNosql(@RequestBody MBlockNosql block){
+        return servBlock.createBlockNosql(block);
+    }
+
+
 
 }
