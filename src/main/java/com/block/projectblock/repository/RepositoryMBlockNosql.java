@@ -3,6 +3,7 @@ package com.block.projectblock.repository;
 import com.block.projectblock.dto.DtoMblock;
 import com.block.projectblock.model.MBlock;
 import com.block.projectblock.model.MBlockNosql;
+import org.bson.Document;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
 import java.util.Optional;
 
 @Repository
@@ -22,6 +24,8 @@ public interface RepositoryMBlockNosql extends MongoRepository<MBlockNosql,Strin
 
     @Query("{ hash : ?0 }")
     Optional<MBlockNosql> findByHash(String hash);
+    @Query("{ _id : ?0 }")
+    Optional<Document> findByid(String id);
 
 
 }

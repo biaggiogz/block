@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class PoolNosql {
-
+    @Id
     int id;
     String seudonimo;
     String name;

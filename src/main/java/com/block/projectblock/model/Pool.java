@@ -16,7 +16,7 @@ import javax.persistence.*;
 @ToString
 public class Pool {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     int id;
     String seudonimo;
     String name;

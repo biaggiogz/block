@@ -7,15 +7,21 @@ import com.block.projectblock.repository.RepositoryMBlock;
 import com.block.projectblock.repository.RepositoryMBlockNosql;
 import com.block.projectblock.repository.RepositoryPool;
 import com.block.projectblock.repository.RepositoryPoolNosql;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ServicesMBlock {
+
+
     private final RepositoryMBlock repoBlock;
 
     private final RepositoryMBlockNosql repoBlockNOSQL;
@@ -48,6 +54,7 @@ public class ServicesMBlock {
                 repositoryPool.save(pools.get(x));
             }
             blockupdate.setPools(pools);
+
             return repoBlock.save(blockupdate);
         }
         return null;
@@ -55,14 +62,20 @@ public class ServicesMBlock {
     }
 
     public MBlockNosql updateBlockByPoolNosql(String hash,  List<PoolNosql> pools){
-        MBlockNosql blockupdate = finbyHashNOSQL(hash);
-        if(blockupdate!=null){
+
+
+
+        Document blockupdate1 = finbyHashNOSQL(hash);
+        if(blockupdate1!=null){
             for(int x = 0;  x < pools.size(); x++ ){
+                pools.get(x).setId(LocalTime.MAX.getNano());
                 repositoryPoolNosql.save(pools.get(x));
             }
-            blockupdate.setPools(pools);
-            return repoBlockNOSQL.save(blockupdate);
-        }
+            blockupdate1.replace("pools",pools);
+           MBlockNosql m = blockupdate1.get(blockupdate1.getClass(),MBlockNosql.class);
+
+            return repoBlockNOSQL.save(m);
+       }
         return null;
 
     }
@@ -99,8 +112,8 @@ public class ServicesMBlock {
         return repoBlock.findById(hash).get();
     }
 
-    public MBlockNosql finbyHashNOSQL(String hash){
-        Optional<MBlockNosql> m = repoBlockNOSQL.findByHash(hash);
+    public Document finbyHashNOSQL(String hash){
+        Optional<Document> m = repoBlockNOSQL.findByid(hash);
         return m.get();
     }
     //----------------NoSql_Services--------------------------------//
@@ -108,7 +121,7 @@ public class ServicesMBlock {
 
         return repoBlockNOSQL.findAll();
     }
-    @Async
+
     public MBlockNosql createBlockNosql(MBlockNosql block){
             block.setHash(block.getBits() + block.getBlockSize());
         return repoBlockNOSQL.save(block);
